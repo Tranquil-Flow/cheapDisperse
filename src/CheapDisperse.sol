@@ -6,6 +6,7 @@ interface IERC20 {
 
 contract CheapDisperse {
     error EtherTransferFailed();
+    error TokenTransferFailed();
     error ArrayLengthMismatch();
     error MaxAddressesPerCallLimit();
 
@@ -14,6 +15,8 @@ contract CheapDisperse {
     /// @param values A list of the number of wei that each address will receive
     function disperseEther(address[] calldata recipients, uint[] calldata values) external payable {
         uint length = recipients.length;
+        if (length != values.length) {revert ArrayLengthMismatch();}
+        
         for (uint i = 0; i < length; i++) {
             (bool success, ) = recipients[i].call{value: values[i]}("");
             if (!success) {revert EtherTransferFailed();}
@@ -30,7 +33,8 @@ contract CheapDisperse {
         if (length > 1000) {revert MaxAddressesPerCallLimit();}
 
         for (uint i = 0; i < length; i++) {
-            require(token.transferFrom(msg.sender, recipients[i], values[i]));
+            bool success = token.transferFrom(msg.sender, recipients[i], values[i]);
+            if (!success) {revert TokenTransferFailed();}
         }
     }
 
