@@ -130,6 +130,126 @@ const config: HardhatUserConfig = {
       url: "https://sepolia.publicgoods.network",
       accounts: [deployerPrivateKey],
     },
+    linea: {
+      url: "https://rpc.linea.build",
+      accounts: [deployerPrivateKey],
+    },
+    mode: {
+      url: "https://mainnet.mode.network",
+      accounts: [deployerPrivateKey],
+    },
+    taiko: {
+      url: "https://rpc.katla.taiko.xyz",
+      accounts: [deployerPrivateKey],
+    },
+    zkFair: {
+      url: "https://rpc.zkfair.io",
+      accounts: [deployerPrivateKey],
+    },
+    kroma: {
+      url: "https://api.kroma.network",
+      accounts: [deployerPrivateKey],
+    },
+    fraxtal: {
+      url: "https://rpc.frax.com",
+      accounts: [deployerPrivateKey],
+    },
+    orderly: {
+      url: "https://rpc.orderly.network",
+      accounts: [deployerPrivateKey],
+    },
+    hypdra: {
+      url: "https://rpc.hypra.network",
+      accounts: [deployerPrivateKey],
+    },
+    publicgoods: {
+      url: "https://rpc.publicgoods.network",
+      accounts: [deployerPrivateKey],
+    },
+    ancient8: {
+      url: "https://rpc.ancient8.gg",
+      accounts: [deployerPrivateKey],
+    },
+    asterzk: {
+      url: "https://rpc.startale.com/astar-zkevm",
+      accounts: [deployerPrivateKey],
+    },
+    canto: {
+      url: "https://canto.slingshot.finance",
+      accounts: [deployerPrivateKey],
+    },
+    parallel: {
+      url: "https://rpc.parallel.fi/",
+      accounts: [deployerPrivateKey],
+    },
+    reddio: {
+      url: "https://starknet-madara.reddio.com",
+      accounts: [deployerPrivateKey],
+    },
+    bob: {
+      url: "https://testnet.rpc.gobob.xyz/",
+      accounts: [deployerPrivateKey],
+    },
+    eclipse: {
+      url: "https://subnets.avax.network/eclipse/testnet/rpc",
+      accounts: [deployerPrivateKey],
+    },
+    frame: {
+      url: "https://rpc-frame.syndicate.io",
+      accounts: [deployerPrivateKey],
+    },
+    kinto: {
+      url: "https://rpc.kinto.xyz/http",
+      accounts: [deployerPrivateKey],
+    },
+    lisk: {
+      url: "https://rpc.sepolia-api.lisk.com",
+      accounts: [deployerPrivateKey],
+    },
+    metal: {
+      url: "https://api.metalblockchain.org/ext/bc/C/rpc",
+      accounts: [deployerPrivateKey],
+    },
+    morph: {
+      url: "https://rpc-testnet.morphl2.io",
+      accounts: [deployerPrivateKey],
+    },
+    magma: {
+      url: "https://unidex-sepolia.rpc.caldera.xyz/http",
+      accounts: [deployerPrivateKey],
+    },
+    palm: {
+      url: "https://palm-mainnet.public.blastapi.io",
+      accounts: [deployerPrivateKey],
+    },
+    okx: {
+      url: "https://1rpc.io/oktc",
+      accounts: [deployerPrivateKey],
+    },
+    zenta: {
+      url: "https://rpc-sepolia.zentachain.io",
+      accounts: [deployerPrivateKey],
+    },
+    ten: {
+      url: "https://testnet.ten.xyz/v1",
+      accounts: [deployerPrivateKey],
+    },
+    specular: {
+      url: "https://sepolia.specular.network",
+      accounts: [deployerPrivateKey],
+    },
+    orb3: {
+      url: "https://rpc.orb3.tech/",
+      accounts: [deployerPrivateKey],
+    },
+    mint: {
+      url: "https://testnet-rpc.mintchain.io",
+      accounts: [deployerPrivateKey],
+    },
+    debank: {
+      url: "https://rpc.testnet.debank.com",
+      accounts: [deployerPrivateKey],
+    },
   },
   verify: {
     etherscan: {

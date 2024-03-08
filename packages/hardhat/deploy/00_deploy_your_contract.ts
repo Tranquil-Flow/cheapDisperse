@@ -5,7 +5,44 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const networks = ["goerli", "sepolia"]; // Add your networks here
+const networks = [
+  "goerli",
+  "sepolia",
+  "linea",
+  "zkSync",
+  "polygonZkEvm",
+  "base",
+  "scroll",
+  "mode",
+  "taiko",
+  "zkFair",
+  "kroma",
+  "fraxtal",
+  "orderly",
+  "hypdra",
+  "publicgoods",
+  "ancient8",
+  "asterzk",
+  "canto",
+  "parallel",
+  "reddio",
+  "bob",
+  "eclipse",
+  "frame",
+  "kinto",
+  "lisk",
+  "metal",
+  "morph",
+  "magma",
+  "palm",
+  "okx",
+  "zenta",
+  "ten",
+  "specular",
+  "orb3",
+  "mint",
+  "debank",
+]; // Add your networks here
 
 const deployCheapDisperse: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deploy } = hre.deployments;
