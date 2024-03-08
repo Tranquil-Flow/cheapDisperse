@@ -10,7 +10,7 @@ contract CheapDisperse {
     error ArrayLengthMismatch();
     error ArrayLengthOverMaxLimit();
 
-    /// @dev Function send ether to an array of users
+    /// @notice Sends ether to an array of users
     /// @param recipients A list of addresses that will receive ether
     /// @param values A list of the number of wei that each address will receive
     function disperseEther(address[] calldata recipients, uint[] calldata values) external payable {
@@ -23,7 +23,7 @@ contract CheapDisperse {
         }
     }
 
-    /// @dev Function to send tokens to an array of users
+    /// @notice Sends tokens to an array of users
     /// @param token The address of the token being sent
     /// @param recipients A list of addresses that will receive tokens
     /// @param values A list of the number of tokens that each address will receive
