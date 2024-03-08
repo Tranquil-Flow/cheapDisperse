@@ -1,42 +1,46 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
+import { ethers } from "hardhat";
+import dotenv from "dotenv";
 
-/**
- * Deploys a contract named "YourContract" using the deployer account and
- * constructor arguments set to the deployer address
- *
- * @param hre HardhatRuntimeEnvironment object.
- */
-const deployYourContract: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
-  /*
-    On localhost, the deployer account is the one that comes with Hardhat, which is already funded.
+dotenv.config();
 
-    When deploying to live networks (e.g `yarn deploy --network goerli`), the deployer account
-    should have sufficient balance to pay for the gas fees for contract creation.
+const networks = ["goerli", "sepolia"]; // Add your networks here
 
-    You can generate a random account with `yarn generate` which will fill DEPLOYER_PRIVATE_KEY
-    with a random private key in the .env file (then used on hardhat.config.ts)
-    You can run the `yarn account` command to check your balance in every network.
-  */
-  const { deployer } = await hre.getNamedAccounts();
+const deployCheapDisperse: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const { deploy } = hre.deployments;
 
-  await deploy("YourContract", {
-    from: deployer,
-    // Contract constructor arguments
-    args: [deployer],
-    log: true,
-    // autoMine: can be passed to the deploy function to make the deployment process faster on local networks by
-    // automatically mining the contract deployment transaction. There is no effect on live networks.
-    autoMine: true,
-  });
+  for (const network of networks) {
+    console.log(`🚀 Deploying to ${network}`);
 
-  // Get the deployed contract
-  // const yourContract = await hre.ethers.getContract("YourContract", deployer);
+    // Dynamically set the network
+    await hre.network.provider.request({
+      method: "hardhat_reset",
+      params: [
+        {
+          forking: {
+            jsonRpcUrl: `https://eth-${network}.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+            blockNumber: await ethers.provider.getBlockNumber(),
+          },
+        },
+      ],
+    });
+
+    try {
+      const { deployer } = await hre.getNamedAccounts();
+
+      await deploy("CheapDisperse", {
+        from: deployer,
+        log: true,
+      });
+
+      console.log(`✅ Deployment on ${network} was successful!`);
+    } catch (error: any) {
+      console.log(`❌ Deployment on ${network} failed: ${error.message}`);
+    }
+  }
 };
 
-export default deployYourContract;
+export default deployCheapDisperse;
 
-// Tags are useful if you have multiple deploy files and only want to run one of them.
-// e.g. yarn deploy --tags YourContract
-deployYourContract.tags = ["YourContract"];
+deployCheapDisperse.tags = ["CheapDisperse"];
