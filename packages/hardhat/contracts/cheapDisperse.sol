@@ -16,6 +16,7 @@ contract CheapDisperse {
     function disperseEther(address[] calldata recipients, uint[] calldata values) external payable {
         uint length = recipients.length;
         if (length != values.length) {revert ArrayLengthMismatch();}
+        if (length > 1000) {revert ArrayLengthOverMaxLimit();}
         
         for (uint i = 0; i < length; i++) {
             (bool success, ) = recipients[i].call{value: values[i]}("");
