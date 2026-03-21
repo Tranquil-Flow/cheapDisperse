@@ -15,17 +15,17 @@
 ## Tasks
 
 ### Tests
-- [ ] Write ETH disperse tests: happy path, mismatched array lengths, zero-value transfers, single recipient
-- [ ] Write ERC-20 disperse tests: happy path, insufficient allowance, transfer-from failures
-- [ ] Write failed-transfer tests: verify failed addresses returned correctly, rest of batch continues
-- [ ] Write gas limit edge case tests: 10 / 50 / 100 / 500 recipients
-- [ ] Write reentrancy test: confirm `call{gas: 2300}` prevents fallback exploitation
-- [ ] Gas comparison benchmark: `cheapDisperse` vs `legacyDisperse` for 10 / 50 / 100 / 500 recipients — output results as table in test output
+- [x] Write ETH disperse tests: happy path, mismatched array lengths, zero-value transfers, single recipient
+- [x] Write ERC-20 disperse tests: happy path, insufficient allowance, transfer-from failures
+- [x] Write failed-transfer tests: verify failed addresses returned correctly, rest of batch continues
+- [x] Write gas limit edge case tests: 10 / 50 / 100 / 500 recipients
+- [x] Write reentrancy test: confirm `call{gas: 2300}` prevents fallback exploitation
+- [x] Gas comparison benchmark: `cheapDisperse` vs `legacyDisperse` for 10 / 50 / 100 / 500 recipients — output results as table in test output
 
 ### Contract Hardening
-- [ ] Enforce array length max limit — `ArrayLengthOverMaxLimit` error is defined but not wired; add the check with a sensible cap
+- [x] Enforce array length max limit — `ArrayLengthOverMaxLimit` error is defined but not wired; add the check with a sensible cap
 - [ ] Run gas-killer-analyzer against `cheapDisperse.sol` and apply recommended optimisations (see CLAUDE.md for links)
-- [ ] Verify `disperseToken` handles non-standard ERC-20 tokens safely (USDT-style no-return-value transfers)
+- [x] Verify `disperseToken` handles non-standard ERC-20 tokens safely (USDT-style no-return-value transfers)
 
 ### Deployment
 - [ ] Deploy `cheapDisperse.sol` to Ethereum mainnet
