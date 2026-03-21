@@ -36,12 +36,12 @@
 
 ### Frontend
 - [x] Replace Scaffold-ETH 2 template README with project-specific documentation
-- [ ] Build recipient list input: paste `address,amount` pairs (one per line) or add rows manually
-- [ ] Build token selector: ETH toggle or ERC-20 address input with symbol/balance lookup
-- [ ] Add total amount preview before sending
-- [ ] Add post-send result: show success count and list any failed recipients
-- [ ] Wire up all deployed contract addresses — auto-switch on wallet network change
-- [ ] Mobile-responsive layout
+- [x] Build recipient list input: paste `address,amount` pairs (one per line) or add rows manually
+- [x] Build token selector: ETH toggle or ERC-20 address input with symbol/balance lookup
+- [x] Add total amount preview before sending
+- [x] Add post-send result: show success count and list any failed recipients
+- [x] Wire up all deployed contract addresses — auto-switch on wallet network change
+- [x] Mobile-responsive layout
 - [ ] Deploy frontend to Vercel
 
 ## Phase 2 Preview
