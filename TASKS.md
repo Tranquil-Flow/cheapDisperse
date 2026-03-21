@@ -35,7 +35,7 @@
 - [ ] Document all deployment addresses in `packages/hardhat/deployments/`
 
 ### Frontend
-- [ ] Replace Scaffold-ETH 2 template README with project-specific documentation
+- [x] Replace Scaffold-ETH 2 template README with project-specific documentation
 - [ ] Build recipient list input: paste `address,amount` pairs (one per line) or add rows manually
 - [ ] Build token selector: ETH toggle or ERC-20 address input with symbol/balance lookup
 - [ ] Add total amount preview before sending
