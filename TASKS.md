@@ -24,7 +24,7 @@
 
 ### Contract Hardening
 - [x] Enforce array length max limit — `ArrayLengthOverMaxLimit` error is defined but not wired; add the check with a sensible cap
-- [ ] Run gas-killer-analyzer against `cheapDisperse.sol` and apply recommended optimisations (see CLAUDE.md for links)
+- [x] Run gas-killer-analyzer against `cheapDisperse.sol` and apply recommended optimisations (see CLAUDE.md for links)
 - [x] Verify `disperseToken` handles non-standard ERC-20 tokens safely (USDT-style no-return-value transfers)
 
 ### Deployment
