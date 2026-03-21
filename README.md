@@ -1,80 +1,101 @@
-# 🏗 Scaffold-ETH 2
+# cheapDisperse
 
-<h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Documentation</a> |
-  <a href="https://scaffoldeth.io">Website</a>
-</h4>
+Gas-optimized batch ETH and ERC-20 token dispersal contract. Send tokens to hundreds of addresses in a single transaction — cheaper and safer than [disperse.app](https://disperse.app).
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+## Features
 
-⚙️ Built using NextJS, RainbowKit, Hardhat, Wagmi, and Typescript.
+- **Batch ETH transfers** — send ETH to up to 1000 recipients in one tx
+- **Batch ERC-20 transfers** — works with standard and non-standard tokens (USDT, etc.)
+- **Graceful failure handling** — failed ETH transfers don't revert the batch; failed addresses are returned
+- **Excess ETH refund** — overpayment or failed-transfer amounts are automatically returned to sender
+- **Gas optimized** — unchecked arithmetic, pre-computed selectors, calldata arrays, cached msg.sender
+- **Reentrancy safe** — uses `call{gas: 2300}` to prevent fallback exploitation
 
-- ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
-- 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
-- 🧱 [**Components**](https://docs.scaffoldeth.io/components/): Collection of common web3 components to quickly build your frontend.
-- 🔥 **Burner Wallet & Local Faucet**: Quickly test your application with a burner wallet and local faucet.
-- 🔐 **Integration with Wallet Providers**: Connect to different wallet providers and interact with the Ethereum network.
+## Contracts
 
-![Debug Contracts tab](https://github.com/scaffold-eth/scaffold-eth-2/assets/55535804/1171422a-0ce4-4203-bcd4-d2d1941d198b)
+| Contract | Description |
+|----------|-------------|
+| `cheapDisperse.sol` | Main dispersal contract |
+| `legacyDisperse.sol` | Baseline comparison (original disperse.app pattern) |
 
-## Requirements
+### Deployed Addresses
 
-Before you begin, you need to install the following tools:
+| Network | Address |
+|---------|---------|
+| Ethereum | _pending_ |
+| Base | _pending_ |
+| Arbitrum One | _pending_ |
+| Optimism | _pending_ |
 
-- [Node (v18 LTS)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
-- [Git](https://git-scm.com/downloads)
+## Usage
 
-## Quickstart
+### Disperse ETH
 
-To get started with Scaffold-ETH 2, follow the steps below:
-
-1. Clone this repo & install dependencies
-
-```
-git clone https://github.com/scaffold-eth/scaffold-eth-2.git
-cd scaffold-eth-2
-yarn install
-```
-
-2. Run a local network in the first terminal:
-
-```
-yarn chain
+```solidity
+// Send ETH to multiple recipients
+cheapDisperse.disperseEther{value: totalAmount}(
+    [addr1, addr2, addr3],
+    [amount1, amount2, amount3]
+);
+// Returns: address[] of any failed recipients
 ```
 
-This command starts a local Ethereum network using Hardhat. The network runs on your local machine and can be used for testing and development. You can customize the network configuration in `hardhat.config.ts`.
+### Disperse ERC-20 Tokens
 
-3. On a second terminal, deploy the test contract:
+```solidity
+// First: approve cheapDisperse to spend your tokens
+token.approve(cheapDisperseAddress, totalAmount);
 
-```
-yarn deploy
-```
-
-This command deploys a test smart contract to the local network. The contract is located in `packages/hardhat/contracts` and can be modified to suit your needs. The `yarn deploy` command uses the deploy script located in `packages/hardhat/deploy` to deploy the contract to the network. You can also customize the deploy script.
-
-4. On a third terminal, start your NextJS app:
-
-```
-yarn start
+// Then: disperse
+cheapDisperse.disperseToken(
+    tokenAddress,
+    [addr1, addr2, addr3],
+    [amount1, amount2, amount3]
+);
 ```
 
-Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
+## Development
 
-Run smart contract test with `yarn hardhat:test`
+Built with [Scaffold-ETH 2](https://scaffoldeth.io) (Next.js + Hardhat + RainbowKit + wagmi).
 
-- Edit your smart contract `YourContract.sol` in `packages/hardhat/contracts`
-- Edit your frontend in `packages/nextjs/pages`
-- Edit your deployment scripts in `packages/hardhat/deploy`
+### Prerequisites
 
-## Documentation
+- Node.js v18+
+- Yarn
 
-Visit our [docs](https://docs.scaffoldeth.io) to learn how to start building with Scaffold-ETH 2.
+### Commands
 
-To know more about its features, check out our [website](https://scaffoldeth.io).
+```bash
+yarn install          # Install dependencies
+yarn chain            # Start local Hardhat network
+yarn deploy           # Deploy contracts to local network
+yarn start            # Start Next.js frontend (localhost:3000)
+yarn hardhat:test     # Run contract tests
+```
 
-## Contributing to Scaffold-ETH 2
+### Project Structure
 
-We welcome contributions to Scaffold-ETH 2!
+```
+packages/
+├── hardhat/
+│   ├── contracts/         # Solidity contracts
+│   │   ├── cheapDisperse.sol
+│   │   └── legacyDisperse.sol
+│   ├── test/              # Hardhat tests (19 tests)
+│   └── deploy/            # Deployment scripts
+└── nextjs/                # Frontend application
+```
 
-Please see [CONTRIBUTING.MD](https://github.com/scaffold-eth/scaffold-eth-2/blob/main/CONTRIBUTING.md) for more information and guidelines for contributing to Scaffold-ETH 2.
+### Tests
+
+19 tests covering:
+- ETH disperse: happy path, mismatched arrays, zero-value, single recipient
+- ERC-20 disperse: happy path, insufficient allowance, transfer failures
+- Failed-transfer handling: partial failures, batch continuation
+- Gas limits: 10 / 50 / 100 / 500 recipients
+- Reentrancy protection: `call{gas: 2300}` prevents fallback exploitation
+- Gas benchmarks: cheapDisperse vs legacyDisperse comparison
+
+## License
+
+UNLICENSED
