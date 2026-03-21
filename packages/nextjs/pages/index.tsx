@@ -1,58 +1,57 @@
-import Link from "next/link";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useAccount } from "wagmi";
 import { MetaHeader } from "~~/components/MetaHeader";
+import DisperseForm from "~~/components/disperse/DisperseForm";
 
 const Home: NextPage = () => {
+  const { isConnected } = useAccount();
+
   return (
     <>
-      <MetaHeader />
-      <div className="flex items-center flex-col flex-grow pt-10">
-        <div className="px-5">
-          <h1 className="text-center mb-8">
-            <span className="block text-2xl mb-2">Welcome to</span>
-            <span className="block text-4xl font-bold">Scaffold-ETH 2</span>
-          </h1>
-          <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/nextjs/pages/index.tsx
-            </code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              YourContract.sol
-            </code>{" "}
-            in{" "}
-            <code className="italic bg-base-300 text-base font-bold max-w-full break-words break-all inline-block">
-              packages/hardhat/contracts
-            </code>
-          </p>
-        </div>
+      <MetaHeader
+        title="cheapDisperse | Batch ETH & Token Transfers"
+        description="Gas-optimized batch ETH and ERC-20 token disperse tool. Send to up to 1,000 recipients in a single transaction."
+      />
 
-        <div className="flex-grow bg-base-300 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
-                tab.
-              </p>
+      <div className="min-h-screen bg-base-200">
+        <div className="max-w-3xl mx-auto px-4 py-10">
+          {/* Header */}
+          <div className="text-center mb-10">
+            <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2">
+              cheap<span className="text-primary">Disperse</span>
+            </h1>
+            <p className="text-base-content/60 text-lg">
+              Batch ETH &amp; token transfers — gas‑optimized
+            </p>
+          </div>
+
+          {/* Connect wallet prompt */}
+          {!isConnected ? (
+            <div className="card bg-base-100 shadow-lg">
+              <div className="card-body items-center text-center py-16">
+                <div className="text-6xl mb-4">🔌</div>
+                <h2 className="card-title text-2xl">Connect your wallet</h2>
+                <p className="text-base-content/60 max-w-sm">
+                  Connect a wallet to start dispersing ETH or ERC-20 tokens to multiple recipients in a single transaction.
+                </p>
+                <div className="mt-6">
+                  {/* RainbowKit ConnectButton is rendered via the Scaffold-ETH header */}
+                  <p className="text-sm text-base-content/40">
+                    Use the connect button in the top navigation bar.
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
-              <p>
-                Explore your local transactions with the{" "}
-                <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
-                tab.
-              </p>
-            </div>
+          ) : (
+            <DisperseForm />
+          )}
+
+          {/* Feature pills */}
+          <div className="mt-10 flex flex-wrap justify-center gap-3 text-sm text-base-content/50">
+            <div className="badge badge-outline badge-lg gap-1">⚡ Gas-optimized</div>
+            <div className="badge badge-outline badge-lg gap-1">📦 Up to 1,000 recipients</div>
+            <div className="badge badge-outline badge-lg gap-1">🪙 ETH &amp; ERC-20</div>
+            <div className="badge badge-outline badge-lg gap-1">🔒 Non-custodial</div>
           </div>
         </div>
       </div>
