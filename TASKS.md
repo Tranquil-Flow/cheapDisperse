@@ -26,13 +26,17 @@
 - [x] Enforce array length max limit — `ArrayLengthOverMaxLimit` error is defined but not wired; add the check with a sensible cap
 - [x] Run gas-killer-analyzer against `cheapDisperse.sol` and apply recommended optimisations (see CLAUDE.md for links)
 - [x] Verify `disperseToken` handles non-standard ERC-20 tokens safely (USDT-style no-return-value transfers)
+- [x] Add events: `EtherDispersed` and `TokenDispersed` for off-chain indexing
+- [x] Add `disperseEtherEqual` / `disperseTokenEqual` — single value for all recipients (saves calldata gas)
+- [x] Add `disperseEtherFast` — assembly ETH transfer, reverts on failure (max gas efficiency for EOA recipients)
+- [x] Fix 3 test failures (old artifact names in GasTest.ts, remove obsolete cheapDisperse.test.js)
 
 ### Deployment
-- [ ] Deploy `cheapDisperse.sol` to Ethereum mainnet
-- [ ] Deploy to Base
-- [ ] Deploy to Arbitrum One
-- [ ] Deploy to Optimism
-- [ ] Document all deployment addresses in `packages/hardhat/deployments/`
+- [!] Deploy `cheapDisperse.sol` to Ethereum mainnet  <!-- BLOCKED: needs funded deployer wallet -->
+- [!] Deploy to Base  <!-- BLOCKED: needs funded deployer wallet -->
+- [!] Deploy to Arbitrum One  <!-- BLOCKED: needs funded deployer wallet -->
+- [!] Deploy to Optimism  <!-- BLOCKED: needs funded deployer wallet -->
+- [!] Document all deployment addresses in `packages/hardhat/deployments/`  <!-- BLOCKED: needs funded deployer wallet -->
 
 ### Frontend
 - [x] Replace Scaffold-ETH 2 template README with project-specific documentation

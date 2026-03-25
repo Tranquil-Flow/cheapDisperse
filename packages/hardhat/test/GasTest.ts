@@ -10,7 +10,7 @@ describe("Gas usage", function () {
     const recipientsAddresses = recipients.slice(0, arrayLength).map(recipient => recipient.address);
     const values = Array(arrayLength).fill(1);
 
-    const LegacyDisperse = await ethers.getContractFactory("LegacyDisperse");
+    const LegacyDisperse = await ethers.getContractFactory("Disperse");
     const legacyDisperse = await LegacyDisperse.deploy();
     await legacyDisperse.deployed();
 
@@ -23,7 +23,7 @@ describe("Gas usage", function () {
       `Gas cost for ether disperse in LegacyDisperse: ${ethers.utils.formatEther(oldGasCost.toString())} ether`,
     );
 
-    const CheapDisperse = await ethers.getContractFactory("Disperse");
+    const CheapDisperse = await ethers.getContractFactory("CheapDisperse");
     const cheapDisperse = await CheapDisperse.deploy();
     await cheapDisperse.deployed();
 
@@ -53,7 +53,7 @@ describe("Gas usage", function () {
     await token.deployed();
     await token.transfer(deployer.address, arrayLength * 100);
 
-    const LegacyDisperse = await ethers.getContractFactory("LegacyDisperse");
+    const LegacyDisperse = await ethers.getContractFactory("Disperse");
     const legacyDisperse = await LegacyDisperse.deploy();
     await legacyDisperse.deployed();
 
