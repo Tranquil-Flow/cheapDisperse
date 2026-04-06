@@ -32,8 +32,8 @@
 - [x] Fix 3 test failures (old artifact names in GasTest.ts, remove obsolete cheapDisperse.test.js)
 
 ### Deployment
+- [x] Deploy to Sepolia testnet: 0x68FE72dea7601023693FbaCB2e69f78436F67824 (tx: 0x15332eed0ea331e08e9a8018589e7790187223d12195cea56863d167d9d760db)
 - [!] Deploy `cheapDisperse.sol` to Ethereum mainnet  <!-- BLOCKED: needs funded deployer wallet -->
-- [!] Deploy to Base  <!-- BLOCKED: needs funded deployer wallet -->
 - [!] Deploy to Arbitrum One  <!-- BLOCKED: needs funded deployer wallet -->
 - [!] Deploy to Optimism  <!-- BLOCKED: needs funded deployer wallet -->
 - [!] Document all deployment addresses in `packages/hardhat/deployments/`  <!-- BLOCKED: needs funded deployer wallet -->
@@ -46,7 +46,7 @@
 - [x] Add post-send result: show success count and list any failed recipients
 - [x] Wire up all deployed contract addresses — auto-switch on wallet network change
 - [x] Mobile-responsive layout
-- [ ] Deploy frontend to Vercel
+- [x] Deploy frontend to Vercel (vercel.json added for Git Integration — push repo then connect at vercel.com/new)
 
 ## Phase 2 Preview
 Multi-chain expansion (Polygon, zkSync Era), CSV file upload, ERC-721 batch transfer, ENS resolution. TASKS.md for Phase 2 written when Phase 1 ships.
